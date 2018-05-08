@@ -75,23 +75,22 @@ def report(count, blockSize, totalSize):
         sys.stdout.write("\r%d%%" % percent + ' complete')
         sys.stdout.flush()
 
-
 #获取下载链接的方法
 def downLoadLink(session,url):
-    # print('test1')
     index1 = session.get(url).text
-
     soup = BeautifulSoup(index1,features='lxml')
 
-    dllinks= soup.find_all('a',{
+    dllinks= soup.find('a',{
         'href':re.compile('.*?\.mp4.*?'),
         'target':'blank'
     })
 
     # print(index1)
-
+    # for dllink in dllinks:
+    #     print(dllink)
     return dllinks
 
+t=time.time()
 
 
 # 程序实现目标：
@@ -160,15 +159,17 @@ vlink=[]
 
 #r是登录路径
 r = s.get('http://91porn.com/v.php?category=rf&viewtype=basic')
-print('finish logging')
+print('finish logging'+'\n')
+
+#开始读第1页-n页
 i = 1
-while i < 5 :
+while i < 3 :
     #用Get得到的是cookie乱七八糟的，所以为了用beautiful必须把他变成.text
     html = r.text
     #使用bs来获取连接
     soup = BeautifulSoup(html,features='lxml')
     #获取连接后，写入Vlinks
-    print('analysing page '+ str(i) + ' links...')
+    print('analysing page '+ str(i) + ' links...'+'\n')
     vlinks = soup.find_all('a',{
         'target':'blank',
         'href':re.compile('http://91porn.com/view_video.php\?viewkey=.*?')
@@ -178,48 +179,47 @@ while i < 5 :
     for links in vlinks:
         vlink.append(links['href'])
     i = i + 1
-
-
     r=s.get('http://91porn.com/v.php?category=rf&viewtype=basic&page='+str(i))
 
-print('test 1')
 #获取到的新list,并且去重
 vlink = list(set(vlink))
-print('test 2')
-
 
 #打开网页，获取到下载地址的links
-
-
 for link in vlink:
     dllinks.append(downLoadLink(s,link))
 
-
-for pintlk in dllinks:
-    print(pintlk)
-
-
-
+# for pintlk in dllinks:
+#     print(pintlk)
 #
-# print('finish analysting...'+'\n')
-# print('begin downloading...'+'\n')
+# print('bye')
+
+print('finish analysting...'+'\n')
+print('begin downloading...'+'\n')
 
 
-# newDllinks=[]
-# for links in dllinks:
-#     newDllinks.append(links[0]['href'])
+newDllinks=[]
+for links in dllinks:
+    newDllinks.append(links['href'])
 
-# for link in dllinks:
-#     print('downloading')
-#     print(link)
-#     name = link[link.index('http:')+1]
-#     print(name)
-#     name = name[name.index('//mp43') + 7:name.index('.mp4') + 4]
-#     sys.stdout.write('\rFetching ' + name + '...\n')
-#     urlretrieve(link['href'], './video/'+name, reporthook=report)
-#     sys.stdout.write("\rDownload complete, saved as %s" % (name) + '\n\n')
-#     sys.stdout.flush()
+# for links in newDllinks:
+#     print(links)
 
+for link in newDllinks:
+    print('downloading')
+    name = link[link.index('//mp43') + 7:link.index('.mp4') + 4]
+    sys.stdout.write('\rdownloading ' + name + '...\n')
+    if os.path.exists('./video/'+name):
+        print(name+' already exists. Begin next one.' + '\n')
+        continue
+    urlretrieve(link, './video/'+name, reporthook=report)
+    sys.stdout.write("\rdownload complete, saved as %s" % (name) + '\n\n')
+    sys.stdout.flush()
+
+
+t=time.time()-t
+print('Finished. Time Used: '+ str(t) + 'seconds.'+'\n')
+
+print('Total Download #:' + str(len(newDllinks)))
 # name=[]
 
 #注释掉测试

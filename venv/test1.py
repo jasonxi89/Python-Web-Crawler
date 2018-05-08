@@ -152,12 +152,46 @@ dllinks=['http://185.38.13.130//mp43/264345.mp4?st=Fx_oeP404bEevKWXCprYEg&e=1525
 'http://185.38.13.130//mp43/264196.mp4?st=Y1ZjmJSOrfI3l7HUABol0w&e=1525581569',
 'http://185.38.13.130//mp43/264199.mp4?st=b1TUBVXNasd_jipG7D__-g&e=1525581569']
 
-for index in range(len(dllinks)):
-    print(dllinks[index])
-    name =dllinks[index]
-    name = name[name.index('//mp43') + 7:name.index('.mp4') + 4]
-    print(name)
+# for index in range(len(dllinks)):
+#     print(dllinks[index])
+#     name =dllinks[index]
+#     name = name[name.index('//mp43') + 7:name.index('.mp4') + 4]
+#     print(name)
+#
+# import time
+# print(time.asctime(time.localtime(time.time())))
+# print(time.strftime("%m-%d-%Y %H:%M:%S", time.localtime()))
+#
 
-import time
-print(time.asctime(time.localtime(time.time())))
-print(time.strftime("%m-%d-%Y %H:%M:%S", time.localtime()))
+# import generalFunction
+# generalFunction.writeTxt('./video/','1.txt','123')
+#
+# for link in dllinks:
+#     generalFunction.writeTxt('./video/', '1.txt', link)
+
+# f = open('./video/1.txt', 'a')
+# f.write('123' + '\n')
+# f.close()
+#
+# with open('./video/1.txt') as o:
+#     lines=o.readlines()
+#
+# lines=set(lines)
+#
+# for line in lines:
+#     print('This is in lines: '+ line)
+#
+# if '123\n' in lines:
+#     print("Existed")
+# else:print("Not Existed")
+
+a= 40.273
+b= 3.52
+
+c=a+b
+l=[]
+
+l.append(c)
+print(l)
+
+

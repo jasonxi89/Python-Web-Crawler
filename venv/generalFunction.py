@@ -1,5 +1,5 @@
 import random
-
+import os
 #header list
 headerstr='''Mozilla/5.0(Macintosh;U;IntelMacOSX10_6_8;en-us)AppleWebKit/534.50(KHTML,likeGecko)Version/5.1Safari/534.50
 Mozilla/5.0(Macintosh;IntelMacOSX10.6;rv:2.0.1)Gecko/20100101Firefox/4.0.1
@@ -10,3 +10,12 @@ def getHeaders():
     header = headerstr.split('\n')
     lenth = len(header)
     return header[random.randint(0,lenth-1)]
+
+def writeTxt(path,filename,url):
+    f = open(path + filename, 'a')
+    f.write(url + '\n')
+    f.close()
+
+#读每行
+# with open('./video/1.txt') as o:
+#     lines = o.readlines()
