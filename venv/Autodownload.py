@@ -106,8 +106,8 @@ t=time.time()
 
 s=requests.session()
 
-codeUrl = 'http://91porn.com/captcha.php'
-valcode = requests.get('http://91porn.com/captcha.php')
+codeUrl = 'http://XXX.com/captcha.php'
+valcode = requests.get('http://XXX.com/captcha.php')
 
 f = open('valcode.png', 'wb')
 # 将response的二进制内容写入到文件中
@@ -126,12 +126,12 @@ codeInfo = str(code)
 data={'username': 'sach1130', 'password': '7758521abc', 'captcha_input': codeInfo,'fingerprint':'3628342716','fingerprint2':'149a571a56fac10c8f2b7b5ac6c6f7b8','action_login':'Log+In','x':'39','y':16}
 # 构造Header
 checkHeader = {
-    'Host': '91porn.com',
+    'Host': 'XXX.com',
     'Connection': 'keep-alive',
     'Content-Length': '155',
     'Cache-Control': 'max-age=0',
-    'Origin': 'http://91porn.com',
-    'Referer': 'http://91porn.com/login.php',
+    'Origin': 'XXXX',
+    'Referer': 'http://XXX.com/login.php',
     'Upgrade-Insecure-Requests': '1',
     'Content-Type': 'application/x-www-form-urlencoded',
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
@@ -144,11 +144,11 @@ checkHeader = {
 
 #登录
 print('logging...'+'\n')
-r = s.post('http://91porn.com/login.php',
+r = s.post('http://XXX.com/login.php',
                   headers=checkHeader,
                   # cookies=requests.utils.dict_from_cookiejar(valcode.cookies),
                   data=data)
-# r = s.get('http://91porn.com/my_profile.php')
+# r = s.get('http://XXX.com/my_profile.php')
 #
 # print(r.text)
 #2 开始爬视频
@@ -158,7 +158,7 @@ dllinks=[]
 vlink=[]
 
 #r是登录路径
-r = s.get('http://91porn.com/v.php?category=rf&viewtype=basic')
+r = s.get('http://XXX.com/v.php?category=rf&viewtype=basic')
 print('finish logging'+'\n')
 
 #开始读第1页-n页
@@ -172,14 +172,14 @@ while i < 3 :
     print('analysing page '+ str(i) + ' links...'+'\n')
     vlinks = soup.find_all('a',{
         'target':'blank',
-        'href':re.compile('http://91porn.com/view_video.php\?viewkey=.*?')
+        'href':re.compile('http://XXX.com/view_video.php\?viewkey=.*?')
     })
     #新建List，获取只含有href的list
 
     for links in vlinks:
         vlink.append(links['href'])
     i = i + 1
-    r=s.get('http://91porn.com/v.php?category=rf&viewtype=basic&page='+str(i))
+    r=s.get('http://XXX.com/v.php?category=rf&viewtype=basic&page='+str(i))
 
 #获取到的新list,并且去重
 vlink = list(set(vlink))
