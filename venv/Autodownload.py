@@ -123,7 +123,7 @@ code = input('请输入验证码:')
 codeInfo = str(code)
 
 #准备好登录用的信息
-data={'username': 'sach1130', 'password': '7758521abc', 'captcha_input': codeInfo,'fingerprint':'3628342716','fingerprint2':'149a571a56fac10c8f2b7b5ac6c6f7b8','action_login':'Log+In','x':'39','y':16}
+data={'username': 'XXX', 'password': 'XXX', 'captcha_input': codeInfo,'fingerprint':'3628342716','fingerprint2':'149a571a56fac10c8f2b7b5ac6c6f7b8','action_login':'Log+In','x':'39','y':16}
 # 构造Header
 checkHeader = {
     'Host': 'XXX.com',
